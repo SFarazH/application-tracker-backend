@@ -72,7 +72,7 @@ const login = async (req, res) => {
     });
 
     return res.status(200).json({
-      message:"logged in"
+      message: "logged in",
     });
   } catch (error) {
     return res.status(500).json({
@@ -82,4 +82,13 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login, register };
+const verify = async (req, res) => {
+  const user = req.user;
+  const userData = {
+    name: user.name,
+    email: user.email,
+  };
+  res.status(200).json(userData);
+};
+
+module.exports = { login, register, verify };
