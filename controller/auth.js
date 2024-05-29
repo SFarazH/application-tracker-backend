@@ -82,6 +82,24 @@ const login = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  try {
+    res.cookie("accessToken", "", {
+      httpOnly: true,
+      sameSite: "strict",
+      maxAge: 0,
+    });
+
+    return res.status(200).json({
+      message: "logged out",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+    });
+  }
+};
+
 const verify = async (req, res) => {
   const user = req.user;
   const userData = {
@@ -91,4 +109,4 @@ const verify = async (req, res) => {
   res.status(200).json(userData);
 };
 
-module.exports = { login, register, verify };
+module.exports = { login, register, verify, logout };
