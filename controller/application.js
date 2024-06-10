@@ -52,7 +52,7 @@ const updateStatus = async (req, res) => {
   try {
     const { applicationId } = req.query;
     const { status } = req.body;
-    console.log(applicationId);
+    console.log(status);
     const application = await applicationModel.findById(applicationId);
     if (!application) {
       return res.status(404).json({ message: "Application not found" });
@@ -61,7 +61,7 @@ const updateStatus = async (req, res) => {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    application.status = req.body.status;
+    application.status = status;
     await application.save();
 
     res.status(200).json({ message: "Application updated successfully" });
@@ -71,4 +71,21 @@ const updateStatus = async (req, res) => {
   }
 };
 
-module.exports = { addApplication, deleteApplication,updateStatus };
+const getApplication = async (req, res) => {
+  const user = req.user;
+
+  try {
+    const applications = await applicationModel.find({ userId: user._id });
+    res.status(200).json(applications);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+module.exports = {
+  addApplication,
+  deleteApplication,
+  updateStatus,
+  getApplication,
+};

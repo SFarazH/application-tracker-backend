@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { addNote, deleteNote } = require("../controller/notes");
+const { addNote, deleteNote, getNotes } = require("../controller/notes");
 const { authenticate } = require("../middleware/authenticate");
 
 router.post("/add", authenticate, addNote);
-router.delete("/remove", authenticate, deleteNote);
+router.delete("/delete", authenticate, deleteNote);
+router.get("/get", authenticate, getNotes);
 
 module.exports = router;

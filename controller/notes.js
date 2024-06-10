@@ -39,4 +39,16 @@ const deleteNote = async (req, res) => {
   }
 };
 
-module.exports = { addNote, deleteNote };
+const getNotes = async (req, res) => {
+  const user = req.user;
+
+  try {
+    const notes = user.notes;
+    res.status(200).json(notes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+module.exports = { addNote, deleteNote, getNotes };
