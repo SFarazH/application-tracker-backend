@@ -5,6 +5,7 @@ const resumeSchema = new mongoose.Schema({
   data: Buffer,
   contentType: String,
   userId: String,
+  role: String,
 });
 
 const Resume = mongoose.model("Resume", resumeSchema);
