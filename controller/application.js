@@ -30,7 +30,6 @@ const deleteApplication = async (req, res) => {
 
   try {
     const { applicationId } = req.query;
-    console.log(applicationId);
     const application = await applicationModel.findById(applicationId);
     if (!application) {
       return res.status(404).json({ message: "Application not found" });
@@ -52,7 +51,6 @@ const updateStatus = async (req, res) => {
   try {
     const { applicationId } = req.query;
     const { status } = req.body;
-    console.log(status);
     const application = await applicationModel.findById(applicationId);
     if (!application) {
       return res.status(404).json({ message: "Application not found" });

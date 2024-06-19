@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 async function dbConnect() {
   mongoose
-    .connect("mongodb://127.0.0.1:27017/app")
+    .connect(process.env.DB_URL)
     .then(() => console.log("Connected Successfully"))
     .catch((error) => console.log("Failed to connect", error));
 }
 
-module.exports = {dbConnect}
+module.exports = { dbConnect };
