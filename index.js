@@ -20,6 +20,13 @@ app.use("/application", applicationRoutes); // application routes
 app.use("/note", noteRoutes); // note routes
 app.use("/resume", resumeRoutes); // resume routes
 
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Your frontend origin
+    credentials: true,
+  })
+);
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
