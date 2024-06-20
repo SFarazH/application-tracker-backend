@@ -22,7 +22,7 @@ app.use("/resume", resumeRoutes); // resume routes
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // Your frontend origin
+    origin: true,
     credentials: true,
   })
 );
