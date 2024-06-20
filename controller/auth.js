@@ -68,6 +68,7 @@ const login = async (req, res) => {
     res.cookie("accessToken", jwtToken, {
       httpOnly: true,
       sameSite: "strict",
+      secure: process.env.NODE_ENV === "production", // Set to true if using HTTPS
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
