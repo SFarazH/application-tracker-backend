@@ -115,7 +115,9 @@ const forgotPassword = async (req, res) => {
   try {
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res.status(400).send("User with this email does not exist.");
+      return res
+        .status(400)
+        .json({ message: "User with this email does not exist." });
     }
 
     const token = crypto.randomBytes(20).toString("hex");
@@ -140,6 +142,7 @@ const forgotPassword = async (req, res) => {
         rejectUnauthorized: false,
         secureProtocol: "TLSv1_method",
         ciphers: "SSLv3",
+        minVersion: "TLSv1",
       },
     });
 
