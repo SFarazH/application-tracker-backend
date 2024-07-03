@@ -117,7 +117,7 @@ const forgotPassword = async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ message: "User with this email does not exist." });
+        .json({ message: "Email not registered" });
     }
 
     const token = crypto.randomBytes(20).toString("hex");
