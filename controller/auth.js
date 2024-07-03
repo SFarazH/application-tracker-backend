@@ -140,9 +140,7 @@ const forgotPassword = async (req, res) => {
       },
       tls: {
         rejectUnauthorized: false,
-        secureProtocol: "TLSv1_method",
-        ciphers: "SSLv3",
-        minVersion: "TLSv1",
+        minVersion: "TLSv1.2", 
       },
     });
 
