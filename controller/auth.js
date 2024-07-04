@@ -168,14 +168,12 @@ const handleResetPassword = async (req, res) => {
     const { password, confirmPassword } = req.body;
     const token = await tokenSchema.findOne({ token: req.params.token });
     if (!token) {
-      return res
-        .status(400)
-        .json({ meesage: "Password reset token has expired" });
+      return res.status(400).json({ message: "Password token expired" });
     }
 
     const user = await userModel.findById(token.userId);
     if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      return res.status(400).json({ message: "Email not registered" });
     }
 
     if (password === confirmPassword) {
@@ -190,7 +188,7 @@ const handleResetPassword = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal Server Error");
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
