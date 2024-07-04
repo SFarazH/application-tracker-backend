@@ -115,9 +115,7 @@ const forgotPassword = async (req, res) => {
   try {
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res
-        .status(400)
-        .json({ message: "Email not registered" });
+      return res.status(400).json({ message: "Email not registered" });
     }
 
     const token = crypto.randomBytes(20).toString("hex");
@@ -140,7 +138,7 @@ const forgotPassword = async (req, res) => {
       },
       tls: {
         rejectUnauthorized: false,
-        minVersion: "TLSv1.2", 
+        minVersion: "TLSv1.2",
       },
     });
 
@@ -172,12 +170,12 @@ const handleResetPassword = async (req, res) => {
     if (!token) {
       return res
         .status(400)
-        .send("Password reset token is invalid or has expired.");
+        .json({ meesage: "Password reset token has expired" });
     }
 
     const user = await userModel.findById(token.userId);
     if (!user) {
-      return res.status(400).send("User not found.");
+      return res.status(400).json({ message: "User not found" });
     }
 
     if (password === confirmPassword) {
@@ -186,13 +184,13 @@ const handleResetPassword = async (req, res) => {
       await user.save();
       await tokenSchema.deleteOne({ token: req.params.token });
 
-      res.send("Password has been reset successfully.");
+      res.send("Password successfully reset");
     } else {
-      res.status(400).send("Passwords do not match.");
+      res.status(400).json({ message: "Passwords do not match" });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error on the server.");
+    res.status(500).send("Internal Server Error");
   }
 };
 
