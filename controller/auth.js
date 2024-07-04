@@ -147,9 +147,12 @@ const forgotPassword = async (req, res) => {
       from: process.env.USER_ID,
       subject: "Password Reset - Application Tracker",
       text: `
-      Please click on the following link, or paste this into your browser to complete the process:\n\n
-      http://${req.headers.host}/reset/${token}\n\n
-      If you did not request this, please ignore this email and your password will remain unchanged.\n`,
+      Hello ${user.name} ! \n\n
+      
+      Please click on the following link to reset your passowrd:\n\n
+      <b>https://application-tracker-sable.vercel.app/reset-password/${token}</b>\n\n
+      
+      <span style="color: red;">This link is only valid for 5 minutes</span>\n`,
     };
     await transporter.sendMail(mailOptions);
 
