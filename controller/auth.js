@@ -66,12 +66,12 @@ const login = async (req, res) => {
         expiresIn: "1d",
       }
     );
-
+    
     res.cookie("accessToken", jwtToken, {
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "None", 
       secure: process.env.NODE_ENV === "production", // Set to true if using HTTPS
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      maxAge: 4 * 60 * 60 * 1000, // 4 hours
     });
 
     return res.status(200).json({
