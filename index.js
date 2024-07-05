@@ -20,13 +20,6 @@ app.use("/application", applicationRoutes); // application routes
 app.use("/note", noteRoutes); // note routes
 app.use("/resume", resumeRoutes); // resume routes
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
-
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

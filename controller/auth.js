@@ -66,13 +66,16 @@ const login = async (req, res) => {
         expiresIn: "1d",
       }
     );
-    
+
     res.cookie("accessToken", jwtToken, {
       httpOnly: true,
-      sameSite: "None", 
-      secure: process.env.NODE_ENV === "production", // Set to true if using HTTPS
-      maxAge: 4 * 60 * 60 * 1000, // 4 hours
+      sameSite: "None",
+      secure: true, // for production
+      maxAge: 4 * 60 * 60 * 1000,
+      path: "/",
     });
+    res.header("Access-Control-Allow-Credentials", "true");
+    console.log("cookie sent", jwtToken);
 
     return res.status(200).json({
       message: "logged in",
@@ -88,7 +91,7 @@ const logout = async (req, res) => {
   try {
     res.cookie("accessToken", "", {
       httpOnly: true,
-      sameSite: "strict",
+      sameSite: "None",
       maxAge: 0,
       path: "/",
     });
