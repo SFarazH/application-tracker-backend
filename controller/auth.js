@@ -71,7 +71,7 @@ const login = async (req, res) => {
       httpOnly: true,
       sameSite: "None",
       secure: true, // for production
-      maxAge: 4 * 60 * 60 * 1000,
+      maxAge: 24 * 60 * 60 * 1000,
       path: "/",
     });
     res.header("Access-Control-Allow-Credentials", "true");
