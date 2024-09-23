@@ -195,13 +195,13 @@ const handleResetPassword = async (req, res) => {
   }
 };
 
-const getAllUsers = async (res) => {
+const getAllUsers = async (req, res) => {
   try {
-    const users = await userModel.find();
+    const users = await userModel.find().select(["_id", "name"]);
     return res.status(200).json(users);
   } catch (error) {
     console.error("Error fetching users:", error);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
