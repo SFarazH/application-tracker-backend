@@ -166,7 +166,6 @@ const forgotPassword = async (req, res) => {
     });
   }
 };
-
 const handleResetPassword = async (req, res) => {
   try {
     const { password, confirmPassword } = req.body;
@@ -196,10 +195,21 @@ const handleResetPassword = async (req, res) => {
   }
 };
 
+const getAllUsers = async (res) => {
+  try {
+    const users = await userModel.find();
+    return res.status(200).json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   login,
   register,
   verify,
+  getAllUsers,
   logout,
   forgotPassword,
   handleResetPassword,
